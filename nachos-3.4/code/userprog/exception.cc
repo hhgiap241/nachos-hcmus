@@ -176,6 +176,52 @@ ExceptionHandler(ExceptionType which)
 					IncreasePC(); // Tang Program Counter 
 					return;
 					//break;
+				case SC_PrintInt:
+					DEBUG('a', "Print integer to console");
+
+					char s[MAX_LENGTH_INTEGER];
+
+					int n = machine->ReadRegister(4);
+
+					// Sign
+					if (n < 0) {
+						gSynchConsole->Write("-",1);
+						n = -n;
+					}
+
+					// Value without Sign
+					int i = 0;
+
+					while (n > 0) {
+						s[i] = n % 10 + '0';
+
+						i++;
+						n = n / 10;
+					}
+
+
+					int end = i;
+					char tmp;
+
+					for(int i = 0, j = end / 2; i < j; i++) {
+						tmp = s[i];
+						s[i] = s[end - i - 1];
+						s[end - i - 1] = tmp;
+					}
+
+					s[end] = '\n';
+					gSynchConsole->Write(s, end + 1);
+					break;
+
+				case SC_ReadChar:
+					int len;
+					char s[MAX_LENGTH_INTEGER];
+
+					len = gSynchConsole->Read(s, MAX_LENGTH_INTEGER);
+					machine->WriteRegister(2, s[len - 1]);
+
+					interrupt->Halt();
+					break;
 			}
 			break;
 		default: 
