@@ -114,15 +114,15 @@ ExceptionHandler(ExceptionType which)
 			printf("No valid translation is found %d %d\n", which, type);  
 			ASSERT(FALSE);
 			break;
-		case  ReadOnlyException:     // Write attempted to page marked 
+		case  ReadOnlyException:     // Write attempted to page marked "read-only"
 			printf("Write attempted tp page marked %d %d\n", which, type);
 			ASSERT(FALSE);
 			break;
-		case  BusErrorException:     // Translation resulted in an 
+		case  BusErrorException:     // Translation resulted in an invalid physical address
 			printf("Translaion resulted in an %d %d\n", which, type);
 			ASSERT(FALSE);
 			break;
-		case  AddressErrorException: // Unaligned reference or one that
+		case  AddressErrorException: // Unaligned reference or one that was beyond the end of the address space
 			printf("Unaligned reference or one that %d %d\n", which, type);
 			ASSERT(FALSE);
 			break;
@@ -134,7 +134,7 @@ ExceptionHandler(ExceptionType which)
 			printf("Unimplemented or reserved instr %d %d\n", which, type);
 			ASSERT(FALSE);
 			break;
-		case NumExceptionTypes:
+		case NumExceptionTypes: // Number tyoe exception
 			printf("Number type exception is found %d %d\n", which, type);
 			ASSERT(FALSE);
 			break;
