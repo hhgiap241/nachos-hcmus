@@ -1,0 +1,9 @@
+#include "syscall.h"
+
+int main()
+{
+	char character = 'N';
+	PrintChar(character);
+	printf("hihihihihihihihih");
+	Halt();
+}
